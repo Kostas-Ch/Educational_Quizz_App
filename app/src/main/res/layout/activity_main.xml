@@ -9,15 +9,7 @@
     android:background="@drawable/background_img"
     tools:context=".MainActivity">
 
-     <!--TextView
-        android:id="@+id/tv_app_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
-        android:gravity="center"
-        android:textSize="35sp"
 
-        android:textStyle="bold" -->
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"

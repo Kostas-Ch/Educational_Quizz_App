@@ -10,8 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Educational_Quizz_App">
         <activity
+            android:name=".LessonSelection"
+            android:exported="false" />
+        <activity
+            android:name=".ResultsActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".QuestionsActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

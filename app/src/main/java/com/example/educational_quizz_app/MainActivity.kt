@@ -18,7 +18,9 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Παρακαλώ εισάγεται όνομα",Toast.LENGTH_SHORT).show()
             }
             else {
-                val intent = Intent(this, QuestionsActivity::class.java)
+               // val intent = Intent(this, QuestionsActivity::class.java)
+                val intent = Intent(this, LessonSelection::class.java)
+                intent.putExtra(Constants.USER_NAME,EditText_name.text.toString())
                 startActivity(intent)
                 finish()
             }

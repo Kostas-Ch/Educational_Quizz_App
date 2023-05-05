@@ -1,5 +1,6 @@
 package com.example.educational_quizz_app
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -16,10 +17,14 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener
     private var mCurrentPosition: Int=1
     private var mQuestionList: ArrayList<Questions>? =null
     private var mSelectedOptionPosition: Int=0
+    private var mCorrectAnswer: Int=0
+    private var mUserName: String?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questions)
+
+        mUserName= intent.getStringExtra(Constants.USER_NAME)
 
         mQuestionList=Constants.getQuestions()
 
@@ -68,7 +73,9 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener
         {
          option.setTextColor(Color.parseColor("#7A8089"))
          option.typeface= Typeface.DEFAULT
-         option.background=ContextCompat.getDrawable(this,R.drawable.default_background_border)
+         option.background=ContextCompat.getDrawable(
+             this,
+             R.drawable.default_background_border)
         }
     }
 
@@ -77,9 +84,9 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener
         when(v?.id)
         {
         R.id.text_optOne ->{selectedOptionView(text_optOne,1)}
-        R.id.text_optTwo ->{selectedOptionView(text_optTwo,1)}
-        R.id.text_optThree ->{selectedOptionView(text_optThree,1)}
-        R.id.text_optFour ->{selectedOptionView(text_optFour,1)}
+        R.id.text_optTwo ->{selectedOptionView(text_optTwo,2)}
+        R.id.text_optThree ->{selectedOptionView(text_optThree,3)}
+        R.id.text_optFour ->{selectedOptionView(text_optFour,4)}
         R.id.submit_btn ->
         {
             if(mSelectedOptionPosition == 0)
@@ -95,7 +102,13 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener
                         }
                         else ->
                         {
-                            Toast.makeText(this,"Τέλος Quiz",Toast.LENGTH_SHORT).show()
+                            val intent= Intent(this,ResultsActivity::class.java)
+                            intent.putExtra(Constants.USER_NAME,mUserName)
+                            intent.putExtra(Constants.CORRECT_ANSWERS,mCorrectAnswer)
+                            intent.putExtra(Constants.TOTAL_QUESTIONS,mQuestionList!!.size)
+                            startActivity(intent)
+                            finish()
+                            //Toast.makeText(this,"Τέλος Quiz",Toast.LENGTH_SHORT).show()
                         }
                     }
 
@@ -106,6 +119,10 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener
                  if(questions!!.correctAnswer != mSelectedOptionPosition)
                  {
                      answerView(mSelectedOptionPosition, R.drawable.wrong_background_border)
+                 }
+                 else
+                 {
+                     mCorrectAnswer++
                  }
                  answerView(questions.correctAnswer, R.drawable.correct_background_border)
 
@@ -155,7 +172,7 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener
         mSelectedOptionPosition=selectedOptionNum
 
         textView.setTextColor(Color.parseColor("#363A43"))
-        textView.typeface= Typeface.DEFAULT
+        textView.setTypeface(textView.typeface,Typeface.BOLD)
         textView.background=ContextCompat.getDrawable(this,R.drawable.highlighted_background_border)
 
     }

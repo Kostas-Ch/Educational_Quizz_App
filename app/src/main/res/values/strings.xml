@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Educational_Quizz_App</string>
+    <string-array name="Courses">
+        <item name="Course1"> Υπολογιστική Νοημοσύνη</item>
+        <item name="Course2"> Νευρωνικά Δίκτυα</item>
+        <item name="Course3"> Μεταγλωτιστές</item>
+        <item name="Course4"> Λειτουργικά Συστήματα</item>
+        <item name="Course5"> Αρχές Προγραμματισμού</item>
+    </string-array>
 </resources>
